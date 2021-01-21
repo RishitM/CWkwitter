@@ -11,10 +11,12 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
-document.getElementById("hello").innerHTML= ("Welcome "+ name + "!")
+var name=localStorage.getItem("name");
+document.getElementById("hello").innerHTML= ("Welcome "+ name + "!");
 function logout(){
   window.location="index.html";
+  localStorage.removeItem("name");
+  localStorage.removeItem("roomID");
 }
 function add(){
       roomname=document.getElementById("room").value;
