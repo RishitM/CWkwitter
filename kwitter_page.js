@@ -11,7 +11,7 @@ var firebaseConfig = {
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
- name=localStorage.getItem("name");
+ user_name=localStorage.getItem("name");
 console.log(name);
 function logout(){
       window.location="index.html";
@@ -24,7 +24,7 @@ function logout(){
       msg=document.getElementById("message").value;
          console.log(msg);
          firebase.database().ref(id).push({
-               "Name":name,
+               "Name":user_name,
                "message":msg,
                "likes":0
          })
@@ -45,6 +45,14 @@ like_button="<button id='"+firebase_message_id+"'onclick='addLike(this.id)' clas
 
 row= name_with_tag + message_with_tag + like_button + "<hr>";
 document.getElementById("output1").innerHTML +=row;
+
 //End code
       } });  }); }
+      function addLike(msg_id){
+button_id=msg_id;
+likes_screen=document.getElementById(button_id).value;
+updated_likes=Number(likes_screen)+1;
+console.log(updated_likes);
+firebase.database().ref(id).child(msg_id).update({likes:updated_likes})
+      }
 getData();
